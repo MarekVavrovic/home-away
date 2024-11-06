@@ -59,13 +59,14 @@ function Calendar({
         day_hidden: "invisible",
         ...classNames,
       }}
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       components={{
         IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
       }}
       {...props}
     />
-  )
+  );
 }
 Calendar.displayName = "Calendar"
 
