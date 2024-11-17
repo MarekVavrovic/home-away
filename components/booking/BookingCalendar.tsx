@@ -25,9 +25,25 @@ function BookingCalendar() {
 
    const unavailableDates = generateDisabledDates(blockedPeriods);
 
+  // useEffect(() => {
+  //   const selectedRange = generateDateRange(range);
+  //   const isDisabledDateIncluded = selectedRange.some((date) => {
+  //     if (unavailableDates[date]) {
+  //       setRange(defaultSelected);
+  //       toast({
+  //         description: "Some dates are booked. Please select again.",
+  //       });
+  //       return true;
+  //     }
+  //     return false;
+  //   });
+  //   useProperty.setState({ range });
+  // }, [range]);
+
   useEffect(() => {
     const selectedRange = generateDateRange(range);
-    const isDisabledDateIncluded = selectedRange.some((date) => {
+
+    const hasDisabledDate = selectedRange.some((date) => {
       if (unavailableDates[date]) {
         setRange(defaultSelected);
         toast({
@@ -37,9 +53,12 @@ function BookingCalendar() {
       }
       return false;
     });
-    useProperty.setState({ range });
-  }, [range]);
 
+    if (!hasDisabledDate) {
+      useProperty.setState({ range });
+    }
+  }, [range]);
+  
   return (
     <Calendar
       mode="range"
