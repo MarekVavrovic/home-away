@@ -3709,12 +3709,17 @@ model Review {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
 model Property {
  reviews Review[]
 }
 model Profile {
  reviews Review[]
 }
+
+
+
 ```
 
 DON'T FORGET !!!!
@@ -4137,6 +4142,7 @@ export const deleteReviewAction = async (prevState: { reviewId: string }) => {
 import { LuTrash2, LuPenSquare } from 'react-icons/lu';
 
 type actionType = 'edit' | 'delete';
+
 export const IconButton = ({ actionType }: { actionType: actionType }) => {
   const { pending } = useFormStatus();
 
@@ -4180,6 +4186,7 @@ import Title from '@/components/properties/Title';
 import FormContainer from '@/components/form/FormContainer';
 import { IconButton } from '@/components/form/Buttons';
 async function ReviewsPage() {
+  
   const reviews = await fetchPropertyReviewsByUser();
   if (reviews.length === 0) return <EmptyList />;
 
@@ -4759,6 +4766,7 @@ function BookingForm() {
       checkOut,
       price,
     });
+    
   return (
     <Card className='p-8 mb-4'>
       <CardTitle className='mb-8'>Summary </CardTitle>
@@ -5701,6 +5709,7 @@ import { NextResponse } from 'next/server';
 const isPublicRoute = createRouteMatcher(['/', '/properties(.*)']);
 
 const isAdminRoute = createRouteMatcher(['/admin(.*)']);
+
 export default clerkMiddleware(async (auth, req) => {
   const isAdminUser = auth().userId === process.env.ADMIN_USER_ID;
   if (isAdminRoute(req) && !isAdminUser) {
